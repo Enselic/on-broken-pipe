@@ -51,7 +51,7 @@ failed printing to stdout: Broken pipe (os error 32)
 
 ### The Solution
 
-By using `broken-pipe-kills` (which overrides the Externally Implementable Item [`#[std::io::on_broken_pipe]`](https://github.com/rust-lang/rust/issues/150588)), `SIGPIPE` is set to `SIG_DFL` instead, which means your program is nicely killed and don't crash when e.g. piped to `head`:
+By [using](#usage) `broken-pipe-kills` which in implements the Externally Implementable Item [`#[std::io::on_broken_pipe]`](https://github.com/rust-lang/rust/issues/150588), `SIGPIPE` is set to `SIG_DFL` instead which means your program is nicely killed and don't crash when e.g. piped to `head`:
 
 ```rs
 use broken_pipe_kills;
