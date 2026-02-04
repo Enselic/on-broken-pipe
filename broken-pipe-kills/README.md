@@ -5,7 +5,7 @@ Kills your program instead of panicking with
 thread 'main' (1964987) panicked at library/std/src/io/stdio.rs:1165:9:
 failed printing to stdout: Broken pipe (os error 32)
 ```
-due to an unhandled “Broken pipe” error.
+due unhandled “Broken pipe” errors.
 
 ## Usage
 
@@ -24,15 +24,15 @@ use broken_pipe_kills;
 
 to `main.rs` to let `rustc` know it must be linked despite not being explicitly used.
 
-This crate requires `nightly` rust.
+This crate requires `nightly` Rust.
 
 ## Explanation And Examples
 
 ### The Problem
 
-By default, the Rust standard library code [sets](https://github.com/rust-lang/rust/blob/1d05e3c131d7181eb3df1a8c261f43135c99200d/library/std/src/sys/pal/unix/mod.rs#L173) `SIGPIPE` to `SIG_IGN` before your `fn main()` runs. This converts `SIGPIPE` signals to `EPIPE` error, which in turn is converted to [`std::io::ErrorKind::BrokenPipe`](https://doc.rust-lang.org/std/io/enum.ErrorKind.html#variant.BrokenPipe).
+By default, the Rust standard library code [sets](https://github.com/rust-lang/rust/blob/1d05e3c131d7181eb3df1a8c261f43135c99200d/library/std/src/sys/pal/unix/mod.rs#L173) `SIGPIPE` to `SIG_IGN` before your `fn main()` runs. This converts `SIGPIPE` signals to `EPIPE` errors, which in turn is converted to [`std::io::ErrorKind::BrokenPipe`](https://doc.rust-lang.org/std/io/enum.ErrorKind.html#variant.BrokenPipe).
 
-When combined with `println!` that [panics](https://github.com/rust-lang/rust/blob/1d05e3c131d7181eb3df1a8c261f43135c99200d/library/std/src/io/stdio.rs#L1165) upon errors, your program will crash when you e.g. pipe to `head`:
+When combined with `println!()` that [panics](https://github.com/rust-lang/rust/blob/1d05e3c131d7181eb3df1a8c261f43135c99200d/library/std/src/io/stdio.rs#L1165) upon errors, your program will crash when you e.g. pipe to `head`:
 
 ```rs
 fn main() {
@@ -51,7 +51,7 @@ failed printing to stdout: Broken pipe (os error 32)
 
 ### The Solution
 
-By [using](#usage) `broken-pipe-kills` which in implements the Externally Implementable Item [`#\[std::io::on_broken_pipe\]`](https://github.com/rust-lang/rust/issues/150588), `SIGPIPE` is set to `SIG_DFL` instead, so your program is nicely killed when e.g. piped to `head`:
+By [using](#usage) `broken-pipe-kills` which in implements the Externally Implementable Item [`#[std::io::on_broken_pipe]`](https://github.com/rust-lang/rust/issues/150588), `SIGPIPE` is set to `SIG_DFL` instead which means your program is nicely killed and don't crash when e.g. piped to `head`:
 
 ```rs
 use broken_pipe_kills;
@@ -79,4 +79,4 @@ tar --extract --gzip --to-stdout |
 less
 ```
 
-[^1]: but please ensure you adhere to the [crates.io Data Access Policy](https://crates.io/data-access).
+[^1]: Please ensure you adhere to the [crates.io Data Access Policy](https://crates.io/data-access).
