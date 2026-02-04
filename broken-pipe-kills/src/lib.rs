@@ -5,5 +5,5 @@
 
 #[std::io::on_broken_pipe]
 fn on_broken_pipe() -> std::io::OnBrokenPipe {
-    std::io::OnBrokenPipe::Kill
+    std::io::OnBrokenPipe::Inherit
 }
