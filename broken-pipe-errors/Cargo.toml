@@ -1,0 +1,10 @@
+[package]
+edition = "2024"
+name = "broken-pipe-errors"
+version = "0.3.0"
+description = "Stops the Rust standard library from changing the SIPGIPE signal mask in child processes."
+homepage = "https://github.com/Enselic/on-broken-pipe/tree/main/broken-pipe-errors"
+documentation = "https://docs.rs/broken-pipe-errors"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/Enselic/on-broken-pipe/tree/main/broken-pipe-errors"
