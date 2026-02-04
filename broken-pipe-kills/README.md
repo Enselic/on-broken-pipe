@@ -26,7 +26,7 @@ to `main.rs` to let `rustc` know it must be linked despite not being explicitly 
 
 This crate requires `nightly` rust.
 
-## Explanation
+## Explanation And Examples
 
 ### The Problem
 
