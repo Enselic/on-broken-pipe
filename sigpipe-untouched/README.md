@@ -16,7 +16,7 @@ sigpipe-untouched = "0.3.0"
 to your `Cargo.toml` **and**
 
 ```rs
-use sigpipe_untouched;
+extern crate sigpipe_untouched;
 ```
 
 to `main.rs` to let `rustc` know it must be linked despite not being explicitly used.

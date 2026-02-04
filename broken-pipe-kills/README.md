@@ -19,7 +19,7 @@ broken-pipe-kills = "0.2.0"
 to your `Cargo.toml` **and**
 
 ```rs
-use broken_pipe_kills;
+extern crate broken_pipe_kills;
 ```
 
 to `main.rs` to let `rustc` know it must be linked despite not being explicitly used.
@@ -54,7 +54,7 @@ failed printing to stdout: Broken pipe (os error 32)
 By using `broken-pipe-kills` (which overrides the Externally Implementable Item [`#[std::io::on_broken_pipe]`](https://github.com/rust-lang/rust/issues/150588)), `SIGPIPE` is set to `SIG_DFL` instead, which means your program is nicely killed and don't crash when e.g. piped to `head`:
 
 ```rs
-use broken_pipe_kills;
+extern crate broken_pipe_kills;
 
 fn main() {
     loop {

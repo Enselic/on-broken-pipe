@@ -1,7 +1,7 @@
 [package]
 edition = "2024"
 name = "sigpipe-untouched"
-version = "0.3.0"
+version = "0.3.1"
 description = "Get rid of `failed printing to stdout: Broken pipe (os error 32)` panics by setting `SIGPIPE` to `SIG_DFL` before your `fn main()` runs."
 homepage = "https://github.com/Enselic/on-broken-pipe/tree/main/sigpipe-untouched"
 documentation = "https://docs.rs/sigpipe-untouched"
