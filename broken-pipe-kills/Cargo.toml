@@ -1,0 +1,10 @@
+[package]
+edition = "2024"
+name = "broken-pipe-kills"
+version = "0.2.0"
+description = "Get rid of `failed printing to stdout: Broken pipe (os error 32)` panics by setting `SIGPIPE` to `SIG_DFL` before your `fn main()` runs."
+homepage = "https://github.com/Enselic/broken-pipe-kills"
+documentation = "https://docs.rs/broken-pipe-kills"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/Enselic/broken-pipe-kills"
